@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <h3>Интересно, как закончится игра ))</h1>
+
+        <script language="JavaScript">
+
+            function getRandom(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+
+            let mod = getRandom(0, 2);
+            alert("Привет! Давайте сыграем в конфетки!\nНа столе лежит 20 конфет. Играют два игрока делая ход друг после друга.\nПервый ход определяется жеребьёвкой. За один ход можно забрать не более 3 конфет. Победит тот, кто сделает последний ход.");
+            let candy = 20;
+            let step = 0;
+            let count = 0
+            mod == 0 ? alert('По жребию вы ходите первыми!') : alert('По жребию первым ходит бот!');
+
+            while (candy > 0) {
+                if (mod == 0) {
+                    while (count == 0) {
+                        step = parseInt(prompt(`Осталось ${candy} шт.\nСколько хотите взять?`));
+
+                        if (candy >= 3) {
+                            if (step >= 1 & step <= 3) {
+                                count = 1;
+                                break
+                            }
+                            else {
+                                alert('Введите 1, 2 или 3');
+                            }
+                        }
+                        else {
+                            if (step >= 1 & step <= 3 & step <= candy) {
+                                count = 1;
+                                break
+                            }
+                            else {
+                                alert(`Введите число не более ${candy}`);
+                            }
+                        }
+                    }
+                    mod = 1;
+                    count = 0;
+                }
+                else {
+                    test = candy % 4;
+                    if (candy >= 3) {
+                        if (test == 0) {
+                            step = getRandom(1, 4);
+                        }
+                        else {
+                            step = test;
+                        }
+                    }
+                    else {
+                        step = candy
+                    }
+                    alert(`Бот взял ${step}`);
+                    mod = 0;
+                }
+
+                candy = candy - step;
+            }
+
+            if (mod == 0) {
+                alert(`Победил бот!`);
+                document.write("В следующий раз повезет!!!")
+            }
+            else {
+                alert(`Вы победили!!!`);
+                document.write("Победа!!!")
+            }
+        </script>
+
+</body>
+
+</html>
